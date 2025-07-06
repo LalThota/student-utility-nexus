@@ -1,13 +1,14 @@
-
 import React, { useState } from 'react';
 import { Search, Upload, Download, BookOpen, User, Star, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import NotesUploadForm from '@/components/forms/NotesUploadForm';
 
 const NotesSharingPage = () => {
   const [selectedSubject, setSelectedSubject] = useState('all');
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const subjects = [
     { id: 'all', name: 'All Subjects', count: 2400 },
@@ -119,7 +120,10 @@ const NotesSharingPage = () => {
           <h1 className="text-3xl font-bold text-gray-900">Online Notes Sharing</h1>
           <p className="text-gray-600 mt-2">Access and share study materials with your peers</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button 
+          className="bg-blue-600 hover:bg-blue-700"
+          onClick={() => setIsFormOpen(true)}
+        >
           <Upload className="h-4 w-4 mr-2" />
           Upload Notes
         </Button>
@@ -267,6 +271,8 @@ const NotesSharingPage = () => {
           </div>
         </div>
       </div>
+
+      <NotesUploadForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </div>
   );
 };

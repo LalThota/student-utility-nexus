@@ -1,13 +1,14 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, ShoppingCart, Heart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import BuyItemPostForm from '@/components/forms/BuyItemPostForm';
 
 const BuyItemsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const categories = [
     { id: 'all', name: 'All Items', count: 156 },
@@ -112,7 +113,10 @@ const BuyItemsPage = () => {
           <h1 className="text-3xl font-bold text-gray-900">Buy Second Items</h1>
           <p className="text-gray-600 mt-2">Find great deals on pre-owned items from fellow students</p>
         </div>
-        <Button className="bg-green-600 hover:bg-green-700">
+        <Button 
+          className="bg-green-600 hover:bg-green-700"
+          onClick={() => setIsFormOpen(true)}
+        >
           <ShoppingCart className="h-4 w-4 mr-2" />
           Sell Item
         </Button>
@@ -240,6 +244,8 @@ const BuyItemsPage = () => {
           </div>
         </div>
       </div>
+
+      <BuyItemPostForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </div>
   );
 };

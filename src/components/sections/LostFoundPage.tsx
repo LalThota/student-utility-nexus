@@ -1,13 +1,14 @@
-
 import React, { useState } from 'react';
 import { Search, Plus, MapPin, Calendar, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import LostFoundSubmissionForm from '@/components/forms/LostFoundSubmissionForm';
 
 const LostFoundPage = () => {
   const [activeTab, setActiveTab] = useState('lost');
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const lostItems = [
     {
@@ -70,7 +71,10 @@ const LostFoundPage = () => {
           <h1 className="text-3xl font-bold text-gray-900">Lost & Found</h1>
           <p className="text-gray-600 mt-2">Help reunite items with their owners</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button 
+          className="bg-blue-600 hover:bg-blue-700"
+          onClick={() => setIsFormOpen(true)}
+        >
           <Plus className="h-4 w-4 mr-2" />
           Report Item
         </Button>
@@ -171,6 +175,8 @@ const LostFoundPage = () => {
           </div>
         </CardContent>
       </Card>
+
+      <LostFoundSubmissionForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </div>
   );
 };
