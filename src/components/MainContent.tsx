@@ -6,6 +6,7 @@ import BuyItemsPage from '@/components/sections/BuyItemsPage';
 import NotesSharingPage from '@/components/sections/NotesSharingPage';
 import CommunityPage from '@/components/sections/CommunityPage';
 import NotificationsPage from '@/components/sections/NotificationsPage';
+import styles from './MainContent.module.css';
 
 interface MainContentProps {
   activeSection: string;
@@ -32,8 +33,8 @@ const MainContent = ({ activeSection }: MainContentProps) => {
   };
 
   return (
-    <main className="flex-1 lg:ml-0">
-      <div className="max-w-7xl mx-auto">
+    <main className={styles.mainContent}>
+      <div className={styles.container}>
         {renderContent()}
       </div>
     </main>

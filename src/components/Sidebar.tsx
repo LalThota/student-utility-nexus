@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { X, Search, ShoppingBag, FileText, Home, Users, Bell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import styles from './Sidebar.module.css';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -25,31 +25,27 @@ const Sidebar = ({ isOpen, activeSection, setActiveSection, setSidebarOpen }: Si
       {/* Overlay for mobile */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className={styles.overlay}
           onClick={() => setSidebarOpen(false)}
         />
       )}
       
       {/* Sidebar */}
-      <div className={`
-        fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-      `}>
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
         <div className="flex flex-col h-full">
           {/* Close button for mobile */}
-          <div className="flex justify-end p-4 lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
+          <div className={styles.closeButtonContainer}>
+            <button
+              className={styles.closeButton}
               onClick={() => setSidebarOpen(false)}
             >
               <X className="h-5 w-5" />
-            </Button>
+            </button>
           </div>
 
           {/* Navigation Menu */}
-          <nav className="flex-1 px-4 pb-4">
-            <div className="space-y-2">
+          <nav className={styles.nav}>
+            <div className={styles.menuList}>
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -59,16 +55,10 @@ const Sidebar = ({ isOpen, activeSection, setActiveSection, setSidebarOpen }: Si
                       setActiveSection(item.id);
                       setSidebarOpen(false);
                     }}
-                    className={`
-                      w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors duration-200
-                      ${activeSection === item.id 
-                        ? 'bg-blue-100 text-blue-700 border-r-4 border-blue-600' 
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
-                      }
-                    `}
+                    className={`${styles.menuItem} ${activeSection === item.id ? styles.active : ''}`}
                   >
-                    <Icon className="h-5 w-5 mr-3" />
-                    <span className="font-medium">{item.label}</span>
+                    <Icon className={styles.menuIcon} />
+                    <span>{item.label}</span>
                   </button>
                 );
               })}
@@ -76,11 +66,9 @@ const Sidebar = ({ isOpen, activeSection, setActiveSection, setSidebarOpen }: Si
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-gray-200">
-            <div className="text-center text-sm text-gray-500">
-              <p>College Utility Hub</p>
-              <p>© 2024 Student Services</p>
-            </div>
+          <div className={styles.footer}>
+            <p>College Utility Hub</p>
+            <p>© 2024 Student Services</p>
           </div>
         </div>
       </div>

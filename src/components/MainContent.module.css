@@ -1,0 +1,16 @@
+
+.mainContent {
+  flex: 1;
+  margin-left: 0;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .mainContent {
+    margin-left: 0;
+  }
+}
